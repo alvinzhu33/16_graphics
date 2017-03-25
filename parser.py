@@ -118,7 +118,10 @@ def parse_file( fname, edges, transform, screen, color ):
             add_box(edges, float(args[0]), float(args[1]), float(args[2]), float(args[3]), float(args[4]), float(args[5]));
 
         elif line == 'sphere':
-            add_sphere(edges, float(args[0]), float(args[1]),float(args[2]), float(args[3]), 0.01)
+            add_sphere(edges, float(args[0]), float(args[1]), float(args[2]), float(args[3]), 0.01)
+
+        elif line == 'torus':
+            add_torus(edges, float(args[0]), float(args[1]), float(args[2]), float(args[3]), float(args[4]), 0.01)
 
         elif line == 'display' or line == 'save':
             clear_screen(screen)
