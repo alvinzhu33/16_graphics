@@ -19,6 +19,14 @@ def add_box( points, x, y, z, width, height, depth ):
     add_edge(points, x + width, y, z + depth, x, y, z + depth);
 
 def add_sphere( points, cx, cy, cz, r, step ):
+    sphere = generate_sphere(points, cx, cy, cz, r, step);
+    i = 0;
+    while i < len(sphere):
+        add_edge(points, sphere[i][0], sphere[i][1], sphere[i][2], sphere[i][0]+1, sphere[i][1]+1, sphere[i][2]+1);
+        i += 1;
+
+def generate_sphere( points, cx, cy, cz, r, step ):
+    sphere = [];
     rot = 0;
     while rot < 1:
         circ = 0;
@@ -27,15 +35,21 @@ def add_sphere( points, cx, cy, cz, r, step ):
             x = r*math.cos(circ*pi) + cx;
             y = r*math.sin(circ*pi)*math.cos(rot*2*pi) + cy;
             z = r*math.sin(circ*pi)*math.sin(rot*2*pi) + cz;
-            add_edge(points, x, y, z, x+1, y+1, z+1);
+            sphere.append([x, y, z, 1]);
 
             circ += step;
         rot += step;
-
-def generate_sphere( points, cx, cy, cz, r, step ):
-    pass
+    return sphere;
 
 def add_torus( points, cx, cy, cz, r0, r1, step ):
+    torus = generate_torus(points, cx, cy, cz, r0, r1, step);
+    i = 0;
+    while i < len(torus):
+        add_edge(points, torus[i][0], torus[i][1], torus[i][2], torus[i][0]+1, torus[i][1]+1, torus[i][2]+1);
+        i += 1;
+
+def generate_torus( points, cx, cy, cz, r0, r1, step ):
+    torus = [];
     rot = 0;
     while rot < 1:
         circ = 0;
@@ -48,13 +62,11 @@ def add_torus( points, cx, cy, cz, r0, r1, step ):
             x = cosP*(r0*cosT + r1) + cx;
             y = r0*sinT + cy;
             z = -1*sinP*(r0*cosT + r1) + cz;
-            add_edge(points, x, y, z, x+1, y+1, z+1);
+            torus.append([x, y, z, 1]);
 
             circ += step;
         rot += step;
-
-def generate_torus( points, cx, cy, cz, r0, r1, step ):
-    pass
+    return torus;
 
 def add_circle( points, cx, cy, cz, r, step ):
     x0 = r + cx
