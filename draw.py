@@ -36,7 +36,7 @@ def add_sphere( points, cx, cy, cz, r, step ):
         i += 1;
 
 def generate_sphere( points, cx, cy, cz, r, step ):
-    sphere = [];
+    '''sphere = [];
     rot = 0;
     while rot <= 1:
         circ = 0;
@@ -49,6 +49,23 @@ def generate_sphere( points, cx, cy, cz, r, step ):
 
             circ += step;
         rot += step;
+    return sphere;'''
+    sphere = [];
+    n = 1/step;
+    rotB = 0;
+    while rotB <= n:
+        circB = 0;
+        rot = rotB/n;
+        while circB <= n:
+            circ = circB/n;
+            pi = math.pi
+            x = r*math.cos(circ*pi) + cx;
+            y = r*math.sin(circ*pi)*math.cos(rot*2*pi) + cy;
+            z = r*math.sin(circ*pi)*math.sin(rot*2*pi) + cz;
+            sphere.append([x, y, z, 1]);
+
+            circB += 1;
+        rotB += 1;
     return sphere;
 
 def add_torus( points, cx, cy, cz, r0, r1, step ):
@@ -59,7 +76,7 @@ def add_torus( points, cx, cy, cz, r0, r1, step ):
         i += 1;
 
 def generate_torus( points, cx, cy, cz, r0, r1, step ):
-    torus = [];
+    '''torus = [];
     rot = 0;
     while rot < 1:
         circ = 0;
@@ -76,6 +93,27 @@ def generate_torus( points, cx, cy, cz, r0, r1, step ):
 
             circ += step;
         rot += step;
+    return torus;'''
+    torus = [];
+    n = 1/step
+    rotB = 0;
+    while rotB <= n:
+        circB = 0;
+        rot = rotB/n;
+        while circB <= n:
+            circ = circB/n;
+            pi = math.pi
+            cosP = math.cos(rot*2*pi);
+            cosT = math.cos(circ*2*pi);
+            sinP = math.sin(rot*2*pi);
+            sinT = math.sin(circ*2*pi);
+            x = cosP*(r0*cosT + r1) + cx;
+            y = r0*sinT + cy;
+            z = -1*sinP*(r0*cosT + r1) + cz;
+            torus.append([x, y, z, 1]);
+
+            circB += 1;
+        rotB += 1;
     return torus;
 
 def add_circle( points, cx, cy, cz, r, step ):
