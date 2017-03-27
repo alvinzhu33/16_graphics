@@ -3,7 +3,7 @@ from matrix import *
 from math import *
 
 def add_box( points, x, y, z, width, height, depth ):
-    add_edge(points, x, y, z, x + width, y, z);
+    '''add_edge(points, x, y, z, x + width, y, z);
     add_edge(points, x + width, y, z, x + width, y + height, z);
     add_edge(points, x, y, z, x, y + height, z);
     add_edge(points, x, y + height, z, x + width, y + height, z);
@@ -16,7 +16,17 @@ def add_box( points, x, y, z, width, height, depth ):
     add_edge(points, x, y, z + depth, x, y + height, z + depth);
     add_edge(points, x, y + height, z + depth, x + width, y + height, z + depth);
     add_edge(points, x + width, y + height, z + depth, x + width, y, z + depth);
-    add_edge(points, x + width, y, z + depth, x, y, z + depth);
+    add_edge(points, x + width, y, z + depth, x, y, z + depth);'''
+    add_edge(points, x, y, z, x+1, y+1, z+1)
+    add_edge(points, x, y - height, z, x + 1, y - height + 1 , z + 1)
+    add_edge(points, x + width, y - height, z,  x + width + 1, y - height +1, z + 1)
+    add_edge(points, x + width, y, z, x + width + 1, y + 1, z + 1)
+    
+    add_edge(points, x, y, z - depth, x + 1, y + 1, z - depth + 1)
+    add_edge(points, x, y - height, z - depth, x + 1, y - height + 1, z - depth + 1)
+    add_edge(points, x + width, y - height, z - depth, x + width + 1, y - height + 1, z - depth + 1)
+    add_edge(points, x + width, y, z - depth, x + width + 1, y + 1, z - depth + 1)
+    
 
 def add_sphere( points, cx, cy, cz, r, step ):
     sphere = generate_sphere(points, cx, cy, cz, r, step);
@@ -28,9 +38,9 @@ def add_sphere( points, cx, cy, cz, r, step ):
 def generate_sphere( points, cx, cy, cz, r, step ):
     sphere = [];
     rot = 0;
-    while rot < 1:
+    while rot <= 1:
         circ = 0;
-        while circ < 1:
+        while circ <= 1:
             pi = math.pi
             x = r*math.cos(circ*pi) + cx;
             y = r*math.sin(circ*pi)*math.cos(rot*2*pi) + cy;
